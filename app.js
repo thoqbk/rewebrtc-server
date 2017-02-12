@@ -14,9 +14,10 @@ var httpsOptions = {
   key: fs.readFileSync('./fake-keys/privatekey.pem'),
   cert: fs.readFileSync('./fake-keys/certificate.pem')
 };
+let isLocal = process.env.PORT == null;
 var serverPort = (process.env.PORT  || 4443);
 var server = null;
-if (process.env.LOCAL) {
+if (isLocal) {
   server = require('https').createServer(httpsOptions, app);
 } else {
   server = require('http').createServer(app);
@@ -36,8 +37,8 @@ app.use('/script', express.static(path.join(__dirname, 'script')));
 app.use('/image', express.static(path.join(__dirname, 'image')));
 
 server.listen(serverPort, function(){
-  console.log('Server up and running at %s port', serverPort);
-  if (process.env.LOCAL) {
+  console.log('Rewebrtc-server is up and running at %s port', serverPort);
+  if (isLocal) {
     open('https://localhost:' + serverPort)
   }
 });
