@@ -1,0 +1,147 @@
+html, body{
+  margin:0;
+  height:100%;
+  overflow:hidden;
+  font-size: 16px;
+}
+
+.logo {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  z-index: 10;
+  background-color: rgba(255, 255, 255, 0.5);
+  height: 80px;
+}
+
+.background-img {
+  min-height:100%;
+  min-width:100%;
+  height:auto;
+  width:auto;
+  position:absolute;
+  top:-100%; bottom:-100%;
+  left:-100%; right:-100%;
+  margin:auto;
+  filter: blur(3px);
+}
+
+.background-overlay {
+  min-height:100%;
+  min-width:100%;
+  height:auto;
+  width:auto;
+  position:absolute;
+  top:-100%; bottom:-100%;
+  left:-100%; right:-100%;
+  margin:auto;
+  z-index: 2;
+
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.videos-container {
+  position:absolute;
+  width: 100%;
+  z-index: 3;
+  text-align: center;
+  top: 30%;
+  transform: translateY(-30%);
+}
+
+.video-thumbnail {
+  display: inline-block;
+  height: auto;
+  height: 100%;
+}
+
+.video {
+  max-width: 100%;
+  margin-bottom: 0px;
+  text-align: center;
+}
+
+.video-thumbnail .name {
+  color: orange;
+}
+
+.self-video-container {
+  position:absolute;
+  width: 100%;
+  z-index: 3;
+  text-align: center;
+  bottom: 0px;
+}
+
+.self-video-thumbnail {
+  width: 200px;
+  display: inline-block;
+}
+
+
+.join-container {
+  position:absolute;
+  width: 100%;
+  z-index: 3;
+  text-align: center;
+  top: 40%;
+  transform: translateY(-40%);
+  padding: 50px;
+}
+
+.join-container label {
+  color: white;
+}
+
+.join-container input.name {
+}
+
+.chat-container {
+  position:absolute;
+  right: 0px;
+  top: 0px;
+  left: auto;
+  z-index: 4;
+  text-align: center;
+  width: 20%;
+  height: 100%;
+
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.chat-container .messages {
+  overflow-y: auto;
+  max-height: 85%;
+  text-align: left;
+  padding: 10px;
+}
+
+.chat-container .input-container {
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+  padding-left: 10px;
+  padding-right: 10px;
+  height: 15%;
+}
+
+.input-container textarea {
+  width: 90%;
+  height: 50%;
+  resize: none;
+  background-color: #AAA;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.chat-container .message .name {
+  color: orange;
+  padding-right: 10px;
+}
+
+.chat-container .message .content {
+  color: white;
+}

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>react-native-webrtc server</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <script src="/socket.io/socket.io.js"></script>
+
+  <link rel="stylesheet" type="text/css" href="/style/main.css">
+</head>
+<body>
+  <!--
+  <div id="textRoom" style="display: none;">
+    <div id="textRoomContent">
+      <h3>Text Room</h3>
+    </div>
+    <input id="textRoomInput" >
+    <button onclick="textRoomPress();">Send</button>
+  </div>
+
+  <video id="selfView" autoplay></video>
+  <div id="remoteViewContainer"></div>
+  <div id="roomIDContainer">
+    <input id="roomID" value="abc">
+    <button onclick="press();">Join/Create room</button>
+  </div>
+  -->
+
+  <div class="join-container form-group" style="display: none">
+    <div class="form-inline">
+      <div class="form-group">
+        <label class="join-label"></label>
+      </div>
+      <div class="form-group">
+          <input type="text" class="form-control name" placeholder="Enter your name"/>
+      </div>
+      <div class="form-group">
+          <button class="btn btn-primary" onClick="handleJoinConversationClick()">Join</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="videos-container" style="display: none">
+    <!--
+    <div class="video-thumbnail" style="width: 30%">
+      <img src="/image/sample-image-1.jpg" class="video thumbnail"/>
+      <div class="name">Alex Hoang</div>
+    </div>
+    <div class="video-thumbnail" style="width: 30%">
+      <img src="/image/sample-image-2.jpg" class="video thumbnail"/>
+      <div class="name">Richard Feynman</div>
+    </div>
+    <div class="video-thumbnail" style="width: 30%">
+      <img src="/image/sample-image-3.jpg" class="video thumbnail"/>
+      <div class="name">Tho Q Luong</div>
+    </div>
+    -->
+  </div>
+
+  <div class="chat-container" style="display: none">
+    <div class="messages">
+      <!--
+      <p class="message">
+        <span class="name">Tho Q Luong</span>
+        <span class="content">I think designers should pay more attantion to usability. Unresizable textareas are uncomfortable. Design isn't art. Art is aesthetics and thoughts. Design is aesthetics+usability. Uncomfortable design is bad design. One should think about flexability when they make web-designs. Sites are for using and reading, not watching. Think about a book where you can not turn pages because it's design is being ruined when you do.</span>
+      </p>
+      <p class="message">
+        <span class="name">Alex Hoang</span>
+        <span class="content">Sometimes you really do want a non-resizeable textarea. For instance, in this case, when you're (conditionally) converting a textarea into something that just looks like a label. It looks really odd to have a label with a random floating grabber way off to the side.</span>
+      </p>
+      <p class="message">
+        <span class="name">Alex Hoang</span>
+        <span class="content">Sometimes you really do want a non-resizeable textarea. For instance, in this case, when you're (conditionally) converting a textarea into something that just looks like a label. It looks really odd to have a label with a random floating grabber way off to the side.</span>
+      </p>
+      <p class="message">
+        <span class="name">Alex Hoang</span>
+        <span class="content">Sometimes you really do want a non-resizeable textarea. For instance, in this case, when you're (conditionally) converting a textarea into something that just looks like a label. It looks really odd to have a label with a random floating grabber way off to the side.</span>
+      </p>
+      <p class="message">
+        <span class="name">Tho Q Luong</span>
+        <span class="content">I think designers should pay more attantion to usability. Unresizable textareas are uncomfortable. Design isn't art. Art is aesthetics and thoughts. Design is aesthetics+usability. Uncomfortable design is bad design. One should think about flexability when they make web-designs. Sites are for using and reading, not watching. Think about a book where you can not turn pages because it's design is being ruined when you do.</span>
+      </p>
+      <p class="message">
+        <span class="name">Alex Hoang</span>
+        <span class="content">Sometimes you really do want a non-resizeable textarea. For instance, in this case, when you're (conditionally) converting a textarea into something that just looks like a label. It looks really odd to have a label with a random floating grabber way off to the side.</span>
+      </p>
+      <p class="message">
+        <span class="name">Alex Hoang</span>
+        <span class="content">Sometimes you really do want a non-resizeable textarea. For instance, in this case, when you're (conditionally) converting a textarea into something that just looks like a label. It looks really odd to have a label with a random floating grabber way off to the side.</span>
+      </p>
+      <p class="message">
+        <span class="name">Alex Hoang</span>
+        <span class="content">Sometimes you really do want a non-resizeable textarea. For instance, in this case, when you're (conditionally) converting a textarea into something that just looks like a label. It looks really odd to have a label with a random floating grabber way off to the side.</span>
+      </p>
+      -->
+    </div>
+    <div class="input-container">
+      <textarea onkeypress="handleInputChatContentKeyPress(event)"></textarea>
+    </div>
+  </div>
+
+  <div class="self-video-container">
+    <div class="self-video-thumbnail">
+      <video id="selfView" autoplay class="video thumbnail"></video>
+    </div>
+  </div>
+
+  <!-- Background and Logo-->
+  <a href="http://garena.com"><img class="logo" src="/image/Garena_Logo.png" /></a>
+  <a href="https://github.com/thoqbk/webrtc-in-action" class="github">github.com/thoqbk/webrtc-in-action</a>
+  <a href="https://github.com/thoqbk/webrtc-in-action"><img style="position: absolute; top: 0; right: 0; border: 0; z-index: 10" src="https://camo.githubusercontent.com/52760788cde945287fbb584134c4cbc2bc36f904/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f77686974655f6666666666662e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_white_ffffff.png"></a>
+  <img class="background-img" src="/image/IMG_0187.jpg" />
+  <div class="background-overlay" />
+</body>
+
+<script type="text/javascript" src="/script/prefix.js"></script>
+<script type="text/javascript" src="/script/services.js"></script>
+<script type="text/javascript" src="/script/video-conference.js"></script>
+
+
+</html>
