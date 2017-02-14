@@ -5,7 +5,7 @@
  * Feb 12, 2017
  */
 
-let VIDEO_CONFERENCE_ROOM = "video_conference";
+const VIDEO_CONFERENCE_ROOM = "video_conference";
 
 //Load selfView
 loadLocalStream(true); //muted
@@ -103,4 +103,11 @@ function addMessage(message) {
   setTimeout(() => {
     messagesElement.scrollTop = messagesElement.scrollHeight - messagesElement.clientHeight;
   }, 100);
+}
+
+//------------------------------------------------------------------------------
+//  Utils
+//Redirect to https
+if(window.location.host.indexOf("herokuapp") >=0 && window.location.protocol == "http") {
+  window.location.href = "https://rewebrtc.herokuapp.com/";
 }
