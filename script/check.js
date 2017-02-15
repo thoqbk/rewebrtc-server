@@ -6,8 +6,8 @@
  */
 
 //Redirect to https:
-if(window.location.host.indexOf("herokuapp") >=0 && window.location.protocol == "http") {
-  window.location.href = "https://rewebrtc.herokuapp.com/";
+if(window.location.host.indexOf("herokuapp") >=0 && window.location.protocol.indexOf("https") < 0) {
+  window.location.href = "https://rewebrtc.herokuapp.com" + window.location.pathname;
 }
 
 //Chrome

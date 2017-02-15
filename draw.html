@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Rewebrtc server</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+        <link rel="shortcut icon" href="/image/favicon.ico" type="image/x-icon"/>
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <script src="/socket.io/socket.io.js"></script>
+
+  <link rel="stylesheet" type="text/css" href="/style/main.css">
+</head>
+<body>
+  <br />
+  <button id="connect-to-server" onClick="connectToServer()" class="btn btn-primary">Connect To Server</button>
+  <button id="disconnect" onClick="disconnect()" style="display:none" class="btn btn-default">Disconnect</button>
+  <br /><br />
+  <button id="connect-to-peers" onClick="connectToPeers()" style="display:none" class="btn btn-primary">Connect to Peers</button>
+  <br /><br />
+  <canvas id="myCanvas" width="600" height="450"
+    onmouseup="onMouseUp(event)"
+    onclick="onMouseClick(event)"
+    onmousemove="onMouseMove(event)"
+    onmouseout="onMouseOut(event)"
+    style="border: 1px solid #AAA; background-color: #CCC" />
+</body>
+
+<script type="text/javascript" src="/script/check.js"></script>
+<script type="text/javascript" src="/script/prefix.js"></script>
+<script type="text/javascript" src="/script/draw.js"></script>

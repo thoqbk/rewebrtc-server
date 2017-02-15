@@ -32,6 +32,11 @@ app.get('/', function(req, res){
   res.sendFile(__dirname + '/index.html');
 });
 
+app.get('/draw', function(req, res){
+  console.log('get /');
+  res.sendFile(__dirname + '/draw.html');
+});
+
 app.use('/style', express.static(path.join(__dirname, 'style')));
 app.use('/script', express.static(path.join(__dirname, 'script')));
 app.use('/image', express.static(path.join(__dirname, 'image')));
