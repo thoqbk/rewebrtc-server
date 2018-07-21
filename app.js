@@ -51,16 +51,26 @@ server.listen(serverPort, function(){
 //------------------------------------------------------------------------------
 //  WebRTC Signaling
 function socketIdsInRoom(roomId) {
-  var socketIds = io.nsps['/'].adapter.rooms[roomId];
-  if (socketIds) {
-    var collection = [];
-    for (var key in socketIds) {
-      collection.push(key);
-    }
-    return collection;
-  } else {
-    return [];
-  }
+    var collection = [],
+          ns = io.of("/");    // the default namespace is "/"
+
+      if (ns) {
+          for (var id in ns.connected) {
+              if(roomId) {
+                  // ns.connected[id].rooms is an object!
+                  var rooms = Object.values(ns.connected[id].rooms);
+                  var index = rooms.indexOf(roomId);
+                  if(index !== -1) {
+                      collection.push(ns.connected[id].id);
+                  }
+              }
+              else {
+                  collection.push(ns.connected[id].id);
+              }
+          }
+      }
+
+      return collection;
 }
 
 io.on('connection', function(socket){
@@ -93,19 +103,14 @@ io.on('connection', function(socket){
     }).filter((friend) => friend.socketId != socket.id);
     callback(friends);
     //broadcast
-    friends.forEach((friend) => {
-      io.sockets.connected[friend.socketId].emit("join", {
-        socketId: socket.id, name
-      });
-    });
+    socket.broadcast.to(socket.room).emit('join',{socketId: socket.id, name});
     console.log('Join: ', joinData);
   });
 
   socket.on('exchange', function(data){
     console.log('exchange', data);
     data.from = socket.id;
-    var to = io.sockets.connected[data.to];
-    to.emit('exchange', data);
+    io.to(data.to).emit('exchange',data);
   });
 
   socket.on("count", function(roomId, callback) {
